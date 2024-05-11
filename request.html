@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yande.re API Demo</title>
+<style>
+  main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  .main-content {
+    max-width: 800px;
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+  .post {
+    margin-bottom: 20px;
+  }
+  .post img {
+    max-width: 100%;
+    height: auto;
+  }
+</style>
+</head>
+<body>
+<main>
+    <section>
+        <div class="main-content" id="post-container">
+            <!-- Images will be inserted here dynamically -->
+        </div>
+    </section>
+</main>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  fetch('https://yande.re/post.json?tags=holds%3Afalse&limit=10&api_version=2')
+    .then(response => response.json())
+    .then(data => {
+      const postContainer = document.getElementById('post-container');
+      data.posts.forEach(post => {
+        const img = document.createElement('img');
+        img.src = post.preview_url;
+        img.alt = post.tags;
+        const postDiv = document.createElement('div');
+        postDiv.classList.add('post');
+        postDiv.appendChild(img);
+        postContainer.appendChild(postDiv);
+      });
+    })
+    .catch(error => console.error('Error fetching data:', error));
+});
+</script>
+</body>
+</html>

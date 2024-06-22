@@ -109,7 +109,7 @@ footer .icon-container i {
     background-color: var(--nav-color);
     border: none;
     color: var(--read-color);
-    padding: 15px 40px;
+    padding: 15px;
     font-weight: bold;
     font-size: 20px;
     border-radius: 30px;
